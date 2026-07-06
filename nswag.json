@@ -1,0 +1,33 @@
+{
+  "runtime": "Net90",
+  "defaultVariables": null,
+  "documentGenerator": {
+    "aspNetCoreToOpenApi": {
+      "project": "src/HelpDesk.Api/HelpDesk.Api.csproj",
+      "configuration": "Debug",
+      "targetFramework": "net9.0",
+      "noBuild": false,
+      "documentName": "v1",
+      "output": "openapi/helpdesk-openapi.json",
+      "outputType": "OpenApi3"
+    }
+  },
+  "codeGenerators": {
+    "openApiToTypeScriptClient": {
+      "className": "{controller}Client",
+      "moduleName": "",
+      "namespace": "",
+      "typeScriptVersion": 4.3,
+      "template": "Fetch",
+      "promiseType": "Promise",
+      "httpClass": "HttpClient",
+      "useAbortSignal": true,
+      "generateClientClasses": true,
+      "generateOptionalParameters": true,
+      "generateDtoTypes": true,
+      "markOptionalProperties": true,
+      "nullValue": "Undefined",
+      "output": "clients/helpdesk-client.ts"
+    }
+  }
+}

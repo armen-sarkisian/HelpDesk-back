@@ -1,0 +1,41 @@
+# Build results
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+
+# .NET / Visual Studio / Rider
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+.vshistory/
+
+# Rider
+.idea/
+*.DotSettings.user
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+coverage/
+
+# Local config & secrets — never commit real secrets
+appsettings.*.local.json
+*.local.json
+.env
+.env.*
+secrets.json
+
+# Logs (Serilog file sinks)
+logs/
+*.log
+
+# Misc
+*.tmp
+Thumbs.db
+.DS_Store
