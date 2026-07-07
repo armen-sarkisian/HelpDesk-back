@@ -1,6 +1,6 @@
 # HelpDesk — Ticket Management System (Backend)
 
-Production-style HelpDesk backend built with **ASP.NET 9 Minimal API** and **Clean Architecture**.
+Production-style HelpDesk backend built with **ASP.NET 9** and **Clean Architecture**.
 Demonstrates CQRS (MediatR), EF Core + SQL Server, JWT auth, SignalR real-time updates and a
 NSwag-generated TypeScript client for the (separate) React frontend.
 
@@ -11,7 +11,7 @@ NSwag-generated TypeScript client for the (separate) React frontend.
 
 | Concern            | Technology |
 |--------------------|------------|
-| Web                | ASP.NET 9 Minimal API |
+| Web                | ASP.NET 9 |
 | Data access        | Entity Framework Core, SQL Server (LocalDB in dev) |
 | App layer          | MediatR (CQRS), FluentValidation, Mapster |
 | Auth               | JWT Bearer, role-based (User / Admin) |
@@ -24,8 +24,7 @@ NSwag-generated TypeScript client for the (separate) React frontend.
 
 ```
 HelpDesk.sln
-src/
-  HelpDesk.Domain          # Entities, enums, domain rules (no external deps)
+  HelpDesk.Domain           # Entities, enums, domain rules (no external deps)
   HelpDesk.Application      # CQRS handlers, DTOs, validators, abstractions
   HelpDesk.Infrastructure   # EF Core, repositories, JWT, external services
   HelpDesk.Api              # Minimal API endpoints, DI composition root
@@ -37,7 +36,7 @@ Domain depends on nothing; Infrastructure implements abstractions declared in Ap
 ## Getting started
 
 Prerequisites: **.NET SDK 9** and a **SQL Server** instance (the default connection string points to
-`Server=localhost`; adjust `ConnectionStrings:DefaultConnection` in `src/HelpDesk.Api/appsettings.json`
+`Server=localhost`; adjust `ConnectionStrings:DefaultConnection` in `HelpDesk.Api/appsettings.json`
 or override via environment/user-secrets).
 
 ```bash
@@ -64,20 +63,6 @@ fresh clone is runnable with no manual steps. In Development, Swagger UI is serv
   `appsettings.json` is a placeholder; supply a real secret via user-secrets or environment variables
   in any non-dev environment.
 
-## API surface
-
-Grouped Minimal API endpoints (JWT Bearer required unless noted):
-
-| Group          | Endpoints |
-|----------------|-----------|
-| `/api/auth`    | `POST /register`, `POST /login` (anonymous) |
-| `/api/tickets` | `POST /`, `GET /` (mine), `GET /{id}`, `PUT /{id}`; **admin:** `GET /all`, `PUT /{id}/status`, `PUT /{id}/priority`, `PUT /{id}/assign` |
-| `/api/comments`| `POST /`, `GET /?ticketId=…`; **admin:** `DELETE /{id}` |
-| `/api/users`   | `GET /` (**admin**) |
-| `/hubs/tickets`| SignalR hub — events `TicketStatusChanged`, `TicketAssigned`, `CommentAdded` (JWT via `?access_token=`) |
-
-Errors are returned as RFC 7807 `ProblemDetails` (validation errors as `ValidationProblemDetails`).
-
 ## Database & migrations
 
 ```bash
@@ -99,15 +84,6 @@ dotnet tool install -g NSwag.ConsoleCore   # once
 nswag run nswag.json
 ```
 
-## Tests
-
-```bash
-dotnet test
-```
-
-Unit tests (xUnit + NSubstitute) cover the three areas required by the spec — ticket status
-transitions, ticket-creation validation and the authentication service — plus access-rule checks.
-
 ## Roadmap — delivered ✅
 
 All 13 backend stages are complete (see `PROGRESS.md` for the detailed log):
@@ -121,7 +97,7 @@ All 13 backend stages are complete (see `PROGRESS.md` for the detailed log):
 7. Tickets CQRS & access rules
 8. Admin operations (status / priority / assignment)
 9. Comments
-10. Minimal API endpoints, error handling, Serilog
+10. Error handling, Serilog
 11. SignalR real-time notifications
 12. Seeding & startup migrations
 13. NSwag OpenAPI document & TypeScript client
