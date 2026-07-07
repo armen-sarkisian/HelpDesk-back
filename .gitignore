@@ -39,3 +39,10 @@ logs/
 *.tmp
 Thumbs.db
 .DS_Store
+
+# Untracked from repo (kept locally)
+tz.docx
+practical_test_task_react.md
+PROGRESS.md
+/src/
+/tests/
